@@ -4,7 +4,7 @@ class PlayerNode:
         self._next = None
         self._previous = None
 
-    #Getters
+    #Getters & Setters
     @property
     def key(self):
         return self._player.uid
@@ -14,10 +14,11 @@ class PlayerNode:
     @property
     def previous(self):
         return self._previous
-    #Setters
-    def set_next(self, new_next):
+    @next.setter
+    def next(self, new_next):
         self._next = new_next
-    def set_previous(self, new_previous):
+    @previous.setter
+    def previous(self, new_previous):
         self._previous = new_previous
 
     def __str__(self):
