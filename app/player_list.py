@@ -31,3 +31,13 @@ class PlayerList:
         else:
             self.head = new_node
             self.tail = new_node
+
+    def insert_at_tail(self, player):
+        new_node = PlayerNode(player)
+        new_node.previous = self.tail
+        if self.tail:
+            self.tail.next = new_node
+            self.tail = new_node
+        else:
+            self.head = new_node
+            self.tail = new_node
