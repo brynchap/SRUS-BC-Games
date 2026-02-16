@@ -30,3 +30,30 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(my_list.tail.key, "1")
         my_list.insert_at_tail(my_player2)
         self.assertEqual(my_list.tail.key, "2")
+
+    def test_delete_from_head(self):
+        my_player = Player("1", "Alex")
+        my_player2 = Player("2", "Bob")
+        my_player3 = Player("3", "Charlie")
+        my_list = PlayerList()
+
+        my_list.insert_at_head(my_player)
+        my_list.insert_at_head(my_player2)
+        my_list.insert_at_head(my_player3)
+        self.assertEqual(my_list.head.key, "3")
+        my_list.delete_from_head("2")
+        self.assertEqual(my_list.head.next.key, "1")
+
+    def test_delete_from_tail(self):
+        my_player = Player("1", "Alex")
+        my_player2 = Player("2", "Bob")
+        my_player3 = Player("3", "Charlie")
+        my_list = PlayerList()
+
+        my_list.insert_at_head(my_player)
+        my_list.insert_at_head(my_player2)
+        my_list.insert_at_head(my_player3)
+        self.assertEqual(my_list.head.key, "3")
+        my_list.delete_from_tail("2")
+        self.assertEqual(my_list.head.next.key, "1")
+        self.assertEqual(my_list.tail.previous.key, "3")

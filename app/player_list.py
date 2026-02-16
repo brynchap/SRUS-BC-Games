@@ -41,3 +41,41 @@ class PlayerList:
         else:
             self.head = new_node
             self.tail = new_node
+
+    def delete_from_head(self, my_id):
+        current = self.head
+        previous = self.head
+
+        while current.key != my_id:
+            if current.next is None:
+                return None
+            else:
+                previous = current
+                current = current.next
+        if current == self.head:
+            self.head = self.head.next
+        else:
+            previous.next = current.next
+            if current.next:
+                current.next.previous = current.previous
+        return current
+
+    def delete_from_tail(self, my_id):
+        current = self.tail
+        next = self.tail
+
+        while current.key != my_id:
+            if current.previous is None:
+                return None
+            else:
+                next = current
+                current = current.previous
+
+        if current == self.tail:
+            self.tail = self.tail.previous
+        else:
+            next.previous = current.previous
+            if current.previous:
+                current.previous.next = current.next
+
+        return current
