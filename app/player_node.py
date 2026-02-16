@@ -22,4 +22,4 @@ class PlayerNode:
         self._previous = new_previous
 
     def __str__(self):
-        return f"Node: {self.key}, next: {self.next}, previous: {self.previous}"
+        return f"(Node: {self.key}, Name: {self._player.name})"

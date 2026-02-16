@@ -71,3 +71,14 @@ class TestPlayerList(unittest.TestCase):
         self.assertEqual(my_list.head.key, "3")
         my_list.delete_key("2")
         self.assertEqual(my_list.head.next.key, "1")
+
+    def test_display(self):
+        my_player = Player("1", "Alex")
+        my_player2 = Player("2", "Bob")
+        my_player3 = Player("3", "Charlie")
+        my_list = PlayerList()
+        my_list.insert_at_head(my_player)
+        my_list.insert_at_head(my_player2)
+        my_list.insert_at_head(my_player3)
+        my_list.display(True)
+        my_list.display(False)

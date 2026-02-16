@@ -67,3 +67,18 @@ class PlayerList:
             if current.next:
                 current.next.previous = current.previous
         return current
+
+    def display(self, forward = True):
+        if forward:
+            current = self.head
+            print("[Display List from Head to Tail]")
+            while current is not None:
+                print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                current = current.next
+        else:
+            current = self.tail
+            print("\n[Display List from Tail to Head]")
+            while current is not None:
+                print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                current = current.previous
+        return
