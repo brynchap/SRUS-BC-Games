@@ -1,7 +1,7 @@
 from player_list import PlayerList
 from player import Player
 
-class PlayerHashMap(): #handle collisions by chaining player data using PlayerList data structure
+class PlayerHashMap: #handle collisions by chaining player data using PlayerList data structure
     """
     Methods:
     --------
@@ -45,7 +45,7 @@ class PlayerHashMap(): #handle collisions by chaining player data using PlayerLi
         current = player_list.head
         is_in_list = False
         while current is not None: #Check if the player is already on that player list.
-            if current.uid == key: #If it is, update the player's name.
+            if current.key == key: #If it is, update the player's name.
                 current.name = name
                 is_in_list = True
                 break
@@ -68,3 +68,14 @@ class PlayerHashMap(): #handle collisions by chaining player data using PlayerLi
                 current = current.next
         return number_of_players
 
+    def display(self):
+        list_counter = 1
+        """print contents of each player list with 1 or more players.
+        print the index of the PlayerList and the players in the list"""
+        for i in self.hashmap: #UNFINISHED
+            if self.hashmap[i].head is not None:
+                print(f"PlayerList no.{list_counter}")
+                self.hashmap[i].display()
+                print()
+
+            list_counter += 1

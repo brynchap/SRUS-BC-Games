@@ -8,6 +8,15 @@ class PlayerNode:
     @property
     def key(self):
         return self._player.uid
+
+    @property
+    def name(self):
+        return self._player.name
+
+    @name.setter
+    def name(self, new_name):
+        self._player.name = new_name
+
     @property
     def next(self):
         return self._next

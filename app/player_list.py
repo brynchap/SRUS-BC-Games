@@ -73,12 +73,14 @@ class PlayerList:
             current = self.head
             print("[Display List from Head to Tail]")
             while current is not None:
-                print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                #print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                print(f"[UID: {current.key}]|[NAME: {current.name}]")
                 current = current.next
         else:
             current = self.tail
             print("\n[Display List from Tail to Head]")
             while current is not None:
-                print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                #print(f"[PREVIOUS: {current.previous}]|[CURRENT: {current}]|[NEXT: {current.next}]")
+                print(f"[UID: {current.key}]|[NAME: {current.name}]")
                 current = current.previous
         return
