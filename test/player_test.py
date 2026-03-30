@@ -31,3 +31,11 @@ class TestPlayer(unittest.TestCase):
         self.assertTrue(alice > bob)
         # or, event better
         self.assertGreater(alice, bob)
+
+    def test_sort_quickly(self):
+        players = [Player(name="Alice", uid='01', score=10), Player(name="Bob", uid='02', score=5),
+                   Player(name="Charlie", uid='03', score=15)]
+        quickly_sorted_players = Player.sort_quickly(players)
+        manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10),
+                                   Player(name="Bob", uid='02', score=5)]
+        self.assertListEqual(quickly_sorted_players, manually_sorted_players)

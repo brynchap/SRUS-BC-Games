@@ -55,3 +55,17 @@ class Player:
 
     def __gt__(self, other):
         return self.score > other.score
+
+    @classmethod
+    def sort_quickly(cls, arr):  # Descending order
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[0]
+        left = []
+        right = []
+        for x in arr[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
