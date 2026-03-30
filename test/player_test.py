@@ -1,5 +1,6 @@
 import unittest
 from player import Player
+import random
 
 class TestPlayer(unittest.TestCase):
     def test_properties(self):
@@ -39,3 +40,15 @@ class TestPlayer(unittest.TestCase):
         manually_sorted_players = [Player(name="Charlie", uid='03', score=15), Player(name="Alice", uid='01', score=10),
                                    Player(name="Bob", uid='02', score=5)]
         self.assertListEqual(quickly_sorted_players, manually_sorted_players)
+
+    def test_sort_1000_quickly(self):
+        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+        quickly_sorted_players = Player.sort_quickly(players)
+        sorted_players = sorted(players, reverse=True)
+        scores_quickly_sorted_players = []
+        scores_sorted_players = []
+        for player in quickly_sorted_players:
+            scores_quickly_sorted_players.append(player.score)
+        for player in sorted_players:
+            scores_sorted_players.append(player.score)
+        self.assertListEqual(scores_quickly_sorted_players, scores_sorted_players)
