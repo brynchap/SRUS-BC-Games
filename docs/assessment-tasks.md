@@ -97,7 +97,12 @@ def test_sort_players(self):
 What was the outcome of running the above unit test, copy paste the output **for just this particular test** below:
 
 ```text
-Copy the traceback you got when you ran the test here.
+Error
+Traceback (most recent call last):
+  File "C:\Users\20143871.ED.000\source\repos\Submission\SRUS-BC-Games\test\player_test.py", line 17, in test_sort_players
+    sorted_players = sorted(players)
+                     ^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Player' and 'Player'
 ```
 
 ### 4.3. Success criteria
@@ -114,8 +119,7 @@ What is the **only** magic method that must be implemented in the player class f
 
 **Hint:** if you don't recall this from class, the error message you got when you ran the test will help you.
 -------
-> Answer Here
-> Yes, here - instead of this text!
+> `__gt__(self, other)`
 -------
 #### 4.3.2. Task: Implement the magic method in the Player class
 
@@ -136,7 +140,12 @@ def test_players_can_be_compared_by_score(self):
 Run the test and confirm that your error resembles the previous error
 
 ```text
-INSERT ERROR OUTPUT HERE
+Error
+Traceback (most recent call last):
+  File "C:\Users\20143871.ED.000\source\repos\Submission\SRUS-BC-Games\test\player_test.py", line 17, in test_sort_players
+    sorted_players = sorted(players)
+                     ^^^^^^^^^^^^^^^
+TypeError: '<' not supported between instances of 'Player' and 'Player'
 ```
 
 - Implement the appropriate magic method in the Player class and ensure you pass this test
@@ -157,13 +166,18 @@ INSERT ERROR OUTPUT HERE
 Rerun `test_sort_players` does the test pass? If not, include the output below:
 
 ```text
-Your output here
+Failure
+Traceback (most recent call last):
+  File "C:\Users\20143871.ED.000\source\repos\Submission\SRUS-BC-Games\test\player_test.py", line 23, in test_sort_players
+    self.assertListEqual(sorted_players, manually_sorted_players)
+AssertionError: Lists differ: [Player(name='Alice', uid='01', score='10', Player(name[68 chars]'15'] != [Player(name='Bob', uid='02', score='5', Player(name='A[68 chars]'15']
 ```
 
 ##### 4.3.4.1 Question: why did the equality comparison fail?
 Why did the test fail (note: if it doesn't fail, it means there is something you have already done before you were asked to do so - if that's the case, you need to figure out what that is!)?
 -------
-> Answer here
+> The test originally failed because the sorted_players list sorted by the Player uids in ascending order whereas the manually_sorted_players were sorted manually by score. If this is not the correct reason you are looking for I believe it may be because I added the __eq__ method during portfolio 2
+
 >
 -------
 Add the necessary code to the Player class to ensure that the `test_sort_players` test passes.
@@ -206,7 +220,7 @@ def sort_quickly(arr):
 
 What is the expected time and space complexity of the above algorithm? You can answer using big O or in plain English but in both cases you MUST justify your answer.
 
-> Answer here
+> Since the array values would be randomly ordered and likely have balanced partitions, the expected Time complexity would be O(n log n) while the expected Space complexity would be O(log n)
 
 ### 5.2. Task: Implement the custom sorting algorithm
 
@@ -221,7 +235,19 @@ Add a separate test case to `test_player.py` to test your custom sorting algorit
 Include your code below:
 
 ```python
-# YOUR CUSTOM Sorting here
+@classmethod
+    def sort_quickly(cls, arr): #Descending order
+        if len(arr) <= 1:
+            return arr
+        pivot = arr[0]
+        left = []
+        right = []
+        for x in arr[1:]:
+            if x > pivot:
+                left.append(x)
+            else:
+                right.append(x)
+        return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
 ```
 
 #### 5.2.3. Success criteria
@@ -252,7 +278,17 @@ Include your test case below:
 
 ```python
 
-# YOUR TEST CASE HERE
+def test_sort_1000_quickly(self):
+    players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+    quickly_sorted_players = Player.sort_quickly(players)
+    sorted_players = sorted(players, reverse=True)
+    scores_quickly_sorted_players = []
+    scores_sorted_players = []
+    for player in quickly_sorted_players:
+        scores_quickly_sorted_players.append(player.score)
+    for player in sorted_players:
+        scores_sorted_players.append(player.score)
+    self.assertListEqual(scores_quickly_sorted_players, scores_sorted_players)
 
 ```
 
@@ -274,7 +310,7 @@ Create a test case that tries to sort 1000 players that are already sorted.
 If you get a failure, include the failure below:
 
 ```text
-YOUR FAILURE HERE
+RecursionError: maximum recursion depth exceeded
 ```
 
 ##### 5.3.4.1 Question: Why does the algorithm fail on presorted values?
@@ -283,13 +319,26 @@ Provide a reason why this test failed (if you got a recursion errors, you need t
 
 If your implementation did not fail, you must nevertheless explain why the senior developers algorithm has worse space complexity for presorted values.
 
-> Answer here
+> I got a recursion error for pre-sorted lists because of the imbalanced pivot splits which caused the amount of nested recursions to bypass the limit. whereas sorting an unsorted list would have more balanced splits and much less recursions
 
 Propose a fix to your sorting algorithm that fixes this issue.
 
 ```python
-# YOUR FIX HERE
+@classmethod
+def sort_quickly(cls, arr): #Descending order
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = []
+    right = []
+    for x in arr:
+        if x > pivot:
+            left.append(x)
+        elif x < pivot:
+            right.append(x)
+    return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
 # Highlight what the fix was
+#The fix is to use the middle point as the pivot to have more balanced splits for nearly sorted or fully sorted lists
 ```
 
 #### 5.3.5. Success criteria
@@ -305,7 +354,7 @@ Propose a fix to your sorting algorithm that fixes this issue.
 Complete the following snippet before you submit:
 
 ```text
-I, <name and student number>, completed this work in class <room number>, on <date>, under the supervision of <assessor's name>.
+I, Bryn Chapman 20143871, completed this work in class 3-03, on 30/03/2026, under the supervision of Alexander Schmidt.
 ```
 
 Or (if not completed in class):
