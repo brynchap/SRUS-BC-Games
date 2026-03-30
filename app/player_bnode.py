@@ -21,3 +21,6 @@ class PlayerBNode:
     @right.setter
     def right(self, new_right):
         self._right = new_right
+
+    def __str__(self):
+        return self.player
