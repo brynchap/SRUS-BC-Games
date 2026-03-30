@@ -1,0 +1,8 @@
+1.
+A Binary Search Tree (BST) is a hierarchy-like data set of nodes with each node being capable of having 2 children (left & right) the left node would have less value than the parent and the right would be greater value. The Depth is the number of edges/parents to the root. The height is the number of edges/children to the deepest node in that subtree.
+
+2.
+The algorithm starts at the root and compares that node's value to the Desired Search Value (DSV). If the DSV is less than the current node, change the current node to the left node. if the DSV is greater than the current node, change the current node to the right node. repeat this until the DSV matches the current node, or if the algorithm couldn't find the DSV in the tree.
+
+3. 
+A Balanced BST is a tree where the height is kept within certain limits to ensure certain operations stay efficient.
