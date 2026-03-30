@@ -1,7 +1,11 @@
 class Player:
-    def __init__(self, uid: str, name: str):
+    def __init__(self, uid: str, name: str, score: int = 0):
         self._uid = uid
         self._name = name
+
+        if score < 0:
+            raise ValueError("Score must be a positive integer.")
+        self._score = score
 
     @property
     def uid(self):
@@ -14,6 +18,14 @@ class Player:
     @name.setter
     def name(self, new_name):
         self._name = new_name
+
+    @property
+    def score(self):
+        return self._score
+
+    @score.setter
+    def score(self, new_score):
+        self._score = new_score
     
     def __str__(self):
         return f"Player({self.uid}): '{self.name}'"
@@ -34,3 +46,6 @@ class Player:
         useful for testing, and its customary that two players returning the same hash be considered equal
         """
         return self.uid == other.uid
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(name='{self.name}', uid='{self.uid}', score='{self.score}'"
