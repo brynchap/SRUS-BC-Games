@@ -54,4 +54,4 @@ class Player:
         return f"{self.__class__.__name__}(name='{self.name}', uid='{self.uid}', score='{self.score}'"
 
     def __gt__(self, other):
-        return self.uid > other.uid
+        return self.score > other.score
