@@ -1,3 +1,6 @@
+from functools import total_ordering
+
+@total_ordering
 class Player:
     def __init__(self, uid: str, name: str, score: int = 0):
         self._uid = uid
@@ -49,3 +52,6 @@ class Player:
 
     def __repr__(self):
         return f"{self.__class__.__name__}(name='{self.name}', uid='{self.uid}', score='{self.score}'"
+
+    def __gt__(self, other):
+        return self.uid > other.uid
