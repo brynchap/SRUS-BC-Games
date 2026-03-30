@@ -52,3 +52,15 @@ class TestPlayer(unittest.TestCase):
         for player in sorted_players:
             scores_sorted_players.append(player.score)
         self.assertListEqual(scores_quickly_sorted_players, scores_sorted_players)
+
+    def test_sort_1000_presorted_players(self):
+        players = [Player(name=f"Player {i}", uid=f"{i:03}", score=random.randint(0, 1000)) for i in range(1000)]
+        pre_sorted_players = sorted(players, reverse=True)
+        new_sorted_players = Player.sort_quickly(pre_sorted_players)
+        scores_pre_sorted_players = []
+        scores_new_sorted_players = []
+        for player in pre_sorted_players:
+            scores_pre_sorted_players.append(player.score)
+        for player in new_sorted_players:
+            scores_new_sorted_players.append(player.score)
+        self.assertListEqual(scores_pre_sorted_players, scores_new_sorted_players)

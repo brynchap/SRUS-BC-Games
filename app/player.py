@@ -60,12 +60,12 @@ class Player:
     def sort_quickly(cls, arr):  # Descending order
         if len(arr) <= 1:
             return arr
-        pivot = arr[0]
+        pivot = arr[len(arr) // 2]
         left = []
         right = []
-        for x in arr[1:]:
+        for x in arr:
             if x > pivot:
                 left.append(x)
-            else:
+            elif x < pivot:
                 right.append(x)
         return cls.sort_quickly(left) + [pivot] + cls.sort_quickly(right)
