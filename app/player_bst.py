@@ -37,3 +37,29 @@ class PlayerBST:
             return self.search(root.left, name)
         else: # right
             return self.search(root.right, name)
+
+    def balance(self, root):
+        # turn BST into a list
+        def convert_bst_to_sorted_array(node, result=None):
+            if result is None:
+                result = []
+            if node:
+                # 1. Traverse left subtree
+                convert_bst_to_sorted_array(node.left, result)
+                # 2. Visit root
+                result.append(node.player)
+                # 3. Traverse right subtree
+                convert_bst_to_sorted_array(node.right, result)
+            return result
+        sorted_array = convert_bst_to_sorted_array(root)
+        def convert_sorted_array_to_bbst(arr):
+            if not arr:
+                return None
+            mid = len(arr) // 2
+            root = PlayerBNode(arr[mid])
+
+            #build left and right subtrees
+            root.left = convert_sorted_array_to_bbst(arr[:mid])
+            root.right = convert_sorted_array_to_bbst(arr[mid+1:])
+            return root
+        return convert_sorted_array_to_bbst(sorted_array)
